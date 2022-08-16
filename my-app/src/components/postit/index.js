@@ -1,4 +1,5 @@
 import React from "react";
+import './style.css';
 
 class postit extends React.Component {
     constructor({props}){
@@ -6,11 +7,11 @@ class postit extends React.Component {
         this.state = {props};
     }
     render (){
-        return <div>
-            <a>
-                {this.state.name}
-            </a>
-        </div>
+        return(
+            <div>
+                <textarea className="Postit"></textarea>
+            </div>
+        )
     }
 }
 

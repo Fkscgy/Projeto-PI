@@ -1,5 +1,12 @@
 .Canvas{
     width: 100vw;
     height: 100vh;
-    background-color: aqua;
+    background-color:antiquewhite
+}
+.List{
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: left;
+    list-style: none;
 }
