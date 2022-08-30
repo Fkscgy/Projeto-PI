@@ -8,8 +8,11 @@ class postit extends React.Component {
     }
     render (){
         return(
-            <div>
-                <textarea className="Postit"></textarea>
+            <div className="Postit-body" onClick={() => this.props.handleClick(this.props.id)}>
+                <textarea defaultValue={this.props.value} onBlur={(e) =>{
+                    this.props.handleBlur(this.props.id,e.target.value)} 
+                } 
+                    className="Postit"/>
             </div>
         )
     }

@@ -3,7 +3,7 @@
     height: 100vh;
     background-color:antiquewhite
 }
-.List{
+#List{
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
