@@ -7,14 +7,21 @@
     width: 200px;
     height: 240px;
     margin: 10px;
-    resize:both;
+    resize: both;
     justify-content: center;
+    position: absolute;
 }
+
+#Postit{
+    position: absolute;
+}
+
 .Postit:focus{
     outline: none;
 }
-.Postit{
-    width: 90%;
-    height: 90%;
-    resize:none;
+
+#Drag{
+    background-color:aqua;
+    width: 10px;
+    height: 10px;
 }

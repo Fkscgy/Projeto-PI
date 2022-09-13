@@ -1,16 +1,22 @@
 import React from "react";
+import Draggable from "react-draggable"
 import './style.css';
 
 class postit extends React.Component {
-    constructor({props}){
-        super()
-        this.state = {props};
+    constructor(props){
+        super(props)
+        this.state = {
+            pos:props.pos
+        };
     }
     render (){
         return(
-            <div className="Postit-body" onClick={() => {console.log('11'); this.props.handleClick(this.props.id)}}>
-                <textarea defaultValue={this.props.value} onBlur={(e) =>{this.props.handleBlur(this.props.id,e.target.value)}} className="Postit"/>
-            </div>
+            <Draggable onDrag={(e,data) => {this.setState({pos:{x:data.x,y:data.y}})}} defaultPosition={this.props.pos} handle="#Drag">
+                <div id="Postit">
+                    <div id="Drag"></div>
+                    <textarea className="Postit-body" defaultValue={this.props.value} onBlur={(e) =>{console.log(this.state.pos); this.props.handleBlur(this.props.id,e.target.value,this.state.pos)}}/>
+                </div>
+            </Draggable>
         )
     }
 }
