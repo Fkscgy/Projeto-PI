@@ -11,7 +11,6 @@ class postit extends React.Component {
         };
     }
     render (){
-        console.log(this.props)
         return(
             <Draggable onStop={(e) =>{this.props.handleBlur(this.props.id,this.state.value,this.state.pos)}} onDrag={(e,data) => {this.setState({pos:{x:data.x,y:data.y}})}} defaultPosition={this.props.pos} handle="#Drag">
                 <div id="Postit">

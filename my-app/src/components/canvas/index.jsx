@@ -7,7 +7,6 @@ const Canvas = () => {
     const [lastPostId, setLastPostId] = useState(0);
     const listItem = post.map((value) => <ListItem key={value.id} value={value}/>);
     function ListItem(props) {
-        console.log(props)
         return <Post id={props.value.id} handleBlur ={(id,value,posValue) => change(id,value,posValue)} value={props.value.defaultValue} pos={props.value.pos}/>;
     }
     const add = () => {
