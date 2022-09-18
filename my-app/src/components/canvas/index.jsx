@@ -7,10 +7,10 @@ const Canvas = () => {
     const [lastPostId, setLastPostId] = useState(0);
     const listItem = post.map((value) => <ListItem key={value.id} value={value}/>);
     function ListItem(props) {
-        return <Post id={props.value.id} handleBlur ={(id,value,posValue) => change(id,value,posValue)} value={props.value.default} pos={props.value.pos}/>;
+        console.log(props)
+        return <Post id={props.value.id} handleBlur ={(id,value,posValue) => change(id,value,posValue)} value={props.value.defaultValue} pos={props.value.pos}/>;
     }
     const add = () => {
-        console.log(post)
         setPost(state => [...state, {id:state.length, handleClick:(id) => lastPostId(id),defaultValue:"", pos:{x:0,y:0}}])
     }
     const change = (id,value,posValue) => {
@@ -22,8 +22,7 @@ const Canvas = () => {
         })
     }
     const remove = () => {
-        setPost(previous => [...previous].filter(x => x.id !== lastPostId));
-        setPost(state => state.map((x,y) =>{ return{...x,id: y}}));
+        setPost(state => [...state].filter(x => x.id !== lastPostId).map((x,y) => {return{...x,id: y}}));
     }
     return (
         <div className='Canvas'>
