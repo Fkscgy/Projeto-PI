@@ -4,7 +4,7 @@ import Post from '../postit';
 
 const Canvas = () => {
     const [post, setPost] = useState([]);
-    const [lastPostId, setLastPostId] = useState(0);
+    const [lastPostId, setLastPostId] = useState(-1);
     const listItem = post.map((value) => <ListItem key={value.id} value={value}/>);
     function ListItem(props) {
         return <Post id={props.value.id} handleBlur ={(id,value,posValue) => change(id,value,posValue)} value={props.value.defaultValue} pos={props.value.pos}/>;
@@ -21,12 +21,17 @@ const Canvas = () => {
         })
     }
     const remove = () => {
+        if(lastPostId === -1){
+            alert('nenhum postit selecionado');
+            return;
+        }
         setPost(state => [...state].filter(x => x.id !== lastPostId).map((x,y) => {return{...x,id: y}}));
+        setLastPostId(-1);
     }
     return (
         <div className='Canvas'>
-            <button onClick={add}>Add</button>
-            <button onClick={remove}>Remove</button>
+                <button onClick={add}>+</button>
+                <button onClick={remove}>-</button>   
             <ul>
                 {listItem}
             </ul>
