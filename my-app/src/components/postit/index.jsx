@@ -12,11 +12,10 @@ class postit extends React.Component {
     }
     render (){
         return(
-            
             <Draggable onStop={(e) =>{this.props.handleBlur(this.props.id,this.state.value,this.state.pos)}} onDrag={(e,data) => {this.setState({pos:{x:data.x,y:data.y}})}} defaultPosition={this.props.pos} handle="#Drag">
                 <div id="Postit">
                     <div id="Drag"></div>
-                    <textarea className="Postit-body" value={this.state.value} onChange={(e) => this.setState({value:e.target.value})} defaultValue={this.state.value} onBlur={(e) =>{this.props.handleBlur(this.props.id,this.state.value,this.state.pos)}}/>
+                    <textarea className="Postit-body" onResize={() => console.log(e)} value={this.state.value} onChange={(e) => this.setState({value:e.target.value})} onBlur={(e) =>{this.props.handleBlur(this.props.id,this.state.value,this.state.pos)}}/>
                 </div>
             </Draggable>
         )
