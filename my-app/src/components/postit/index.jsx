@@ -1,26 +1,52 @@
-import React from "react";
-import Draggable from "react-draggable"
-import './style.css';
+import React, { useState, useRef } from "react";
+import Draggable from "react-draggable";
+import useResizeObserver from "@react-hook/resize-observer";
+import "./style.css";
 
-class postit extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            pos:props.pos,
-            value:props.value
-        };
-    }
-    render (){
-        return(
-            <Draggable onStop={(e) =>{this.props.handleBlur(this.props.id,this.state.value,this.state.pos)}} onDrag={(e,data) => {this.setState({pos:{x:data.x,y:data.y}})}} defaultPosition={this.props.pos} handle="#Drag">
-                <div id="Postit">
-                    <div id="Drag"></div>
-                    <textarea className="Postit-body" onResize={() => console.log(e)} value={this.state.value} onChange={(e) => this.setState({value:e.target.value})} onBlur={(e) =>{this.props.handleBlur(this.props.id,this.state.value,this.state.pos)}}/>
-                </div>
-            </Draggable>
-        )
-    }
-    
+function useSize(target) {
+  const [size, setSize] = useState();
+  React.useLayoutEffect(() => {
+    target && setSize(target.current.getBoundingClientRect());
+  }, [target]);
+
+  useResizeObserver(target, (entry) => setSize(entry.contentRect));
+  return size;
 }
+const Postit = ({ id, pos, value, handleBlur, size }) => {
+  const [position, setPosition] = useState(pos);
+  const [valor, setValor] = useState(value);
+  const target = useRef();
+  const tamanho = useSize(target);
 
-export default postit;
+  return (
+    <Draggable
+      onStop={(e) => {
+        handleBlur(id, valor, position, tamanho);
+      }}
+      onDrag={(e, data) => {
+        setPosition({ x: data.x, y: data.y });
+      }}
+      defaultPosition={pos}
+      handle="#Drag"
+    >
+      <div id="Postit">
+        <div id="Drag"></div>
+        <textarea
+          ref={target}
+          style={{
+            width: size.width,
+            height: size.height,
+          }}
+          className="Postit-body"
+          value={valor}
+          onChange={(e) => setValor(e.target.value)}
+          onBlur={(e) => {
+            handleBlur(id, valor, pos, tamanho);
+          }}
+        />
+      </div>
+    </Draggable>
+  );
+};
+
+export default Postit;

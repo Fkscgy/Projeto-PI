@@ -1,7 +1,8 @@
-body{
-    background-color:rgb(55, 54, 63)
+body {
+    background-color: rgb(55, 54, 63)
 }
-#List{
+
+#List {
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
@@ -10,7 +11,7 @@ body{
     margin: 0%;
 }
 
-button{
+button {
     width: 66px;
     height: 66px;
     margin: 15px 10px 15px 15px;
